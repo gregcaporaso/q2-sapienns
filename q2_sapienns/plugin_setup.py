@@ -1,6 +1,7 @@
 from qiime2.plugin import (Plugin, SemanticType, TextFileFormat, model,
                            ValidationError, Citations, Int, Range)
 from q2_types.feature_table import FeatureTable, Frequency
+from q2_types.feature_data import FeatureData, Taxonomy
 
 import q2_sapienns
 
@@ -14,11 +15,11 @@ plugin = Plugin(
     package='q2_sapienns'
 )
 
-Bb3StratifiedTable = SemanticType('Bb3StratifiedTable')
+MergedMetaphlanTable = SemanticType('MergedMetaphlanTable')
 
-plugin.register_semantic_types(Bb3StratifiedTable)
+plugin.register_semantic_types(MergedMetaphlanTable)
 
-class Bb3StatifiedTableFormat(TextFileFormat):
+class MergedMetaphlanTableFormat(TextFileFormat):
 
     def _equal_number_of_columns(self, n_lines):
         with self.open() as fh:
@@ -40,44 +41,78 @@ class Bb3StatifiedTableFormat(TextFileFormat):
         level_to_n_lines = {'min': 5, 'max': None}
         self._equal_number_of_columns(level_to_n_lines[level])
 
-Bb3StatifiedTableDirectoryFormat = model.SingleFileDirectoryFormat(
-    'Bb3StatifiedTableDirectoryFormat', 'table.tsv', Bb3StatifiedTableFormat)
+MergedMetaphlanTableDirectoryFormat = model.SingleFileDirectoryFormat(
+    'MergedMetaphlanTableDirectoryFormat', 'table.tsv', MergedMetaphlanTableFormat)
 
-plugin.register_formats(Bb3StatifiedTableFormat,
-                        Bb3StatifiedTableDirectoryFormat)
+plugin.register_formats(MergedMetaphlanTableFormat,
+                        MergedMetaphlanTableDirectoryFormat)
 
-plugin.register_semantic_type_to_format(Bb3StratifiedTable,
-                                        Bb3StatifiedTableDirectoryFormat)
+plugin.register_semantic_type_to_format(MergedMetaphlanTable,
+                                        MergedMetaphlanTableDirectoryFormat)
 
 
 @plugin.register_transformer
-def _1(ff: Bb3StatifiedTableFormat) -> pd.DataFrame:
-    result = pd.read_csv(str(ff), sep='\t', header=0, index_col=0)
+def _1(ff: MergedMetaphlanTableFormat) -> pd.DataFrame:
+    result = pd.read_csv(str(ff), sep='\t', header=0, index_col=0,
+                         comment='#')
+    result.index.name = 'feature-id'
     return result
 
 citations = Citations.load('citations.bib', package='q2_sapienns')
 
-def table_at_level(stratified_table: pd.DataFrame, level: int) -> pd.DataFrame:
-    # TODO: this doesn't actually do anything interest yet
-    return stratified_table.T
+def select_stratum(stratified_table: pd.DataFrame, level: int)\
+    -> (pd.DataFrame, pd.DataFrame):
+    # Add a column indicating the number of levels contained in each
+    # feature id.
+    stratified_table['n levels'] = stratified_table.apply(
+        lambda x: len(x['NCBI_tax_id'].split('|')), axis=1
+    )
+
+    # Drop features where number of levels is not equal to what was requested
+    # by the user.
+    stratified_table = stratified_table[stratified_table['n levels'] == level]
+    if stratified_table.shape[0] == 0:
+        raise ValueError('No features contained exactly %d taxonomic levels.' % level)
+
+    # Generate the taxonomy result
+    taxonomy = stratified_table['NCBI_tax_id']
+    taxonomy = taxonomy.reset_index()
+    taxonomy['Taxon'] = taxonomy.apply(
+        lambda x: x['feature-id'].replace('|', '; '), axis=1
+    )
+    taxonomy = taxonomy.drop('feature-id', axis=1)
+    taxonomy = taxonomy.set_index('NCBI_tax_id')
+    taxonomy.index.name = 'Feature ID'
+
+    stratified_table = stratified_table.reset_index()
+    stratified_table = stratified_table.drop(['feature-id', 'n levels'],
+                                             axis=1)
+    stratified_table = stratified_table.set_index('NCBI_tax_id')
+    stratified_table.index.name = 'sample-id'
+
+    return stratified_table.T, taxonomy
 
 
 plugin.methods.register_function(
-    function=table_at_level,
-    inputs={'stratified_table': Bb3StratifiedTable},
+    function=select_stratum,
+    inputs={'stratified_table': MergedMetaphlanTable},
     parameters={'level': Int % Range(1,None)},
-    outputs=[('table', FeatureTable[Frequency])],
+    outputs=[('table', FeatureTable[Frequency]),
+             ('taxonomy', FeatureData[Taxonomy])],
     input_descriptions={
-        'stratified_table': ('A stratified bioBakery 3 feature table.'),
+        'stratified_table': ('A stratified Metaphlan3 feature table.'),
     },
     parameter_descriptions={
-        'level': ('The level of the feature metadata heirarchy to select from'
-                  ' the input table.')
+        'level': ('The level (or stratum) of the feature metadata heirarchy '
+                  'to select from the input table.')
     },
-    output_descriptions={'table':
-     ('Filtered table containing only features at specified level.')},
-    name='Filter bioBakery3 feature table to single level.',
-    description=("Filter a bioBakery 3 feature table to the specified level."),
+    output_descriptions={
+        'table': ('Filtered table containing only features at specified '
+                  'level (or stratum).'),
+        'taxonomy': ('Taxonomic feature metadata.')},
+    name='Filter Metaphlan3 feature table to single level (or stratum).',
+    description=("Filter a Metaphlan3 feature table to the specified "
+                 "taxonomic level (or stratum)."),
     citations=[
         citations['bioBakery3']]
 )

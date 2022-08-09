@@ -60,19 +60,24 @@ def _1(ff: MergedMetaphlanTableFormat) -> pd.DataFrame:
 
 citations = Citations.load('citations.bib', package='q2_sapienns')
 
-def select_stratum(stratified_table: pd.DataFrame, level: int)\
+def select_stratum(stratified_table: pd.DataFrame, level: int = None)\
     -> (pd.DataFrame, pd.DataFrame):
-    # Add a column indicating the number of levels contained in each
-    # feature id.
-    stratified_table['n levels'] = stratified_table.apply(
-        lambda x: len(x['NCBI_tax_id'].split('|')), axis=1
-    )
 
-    # Drop features where number of levels is not equal to what was requested
-    # by the user.
-    stratified_table = stratified_table[stratified_table['n levels'] == level]
-    if stratified_table.shape[0] == 0:
-        raise ValueError('No features contained exactly %d taxonomic levels.' % level)
+    if level is not None:
+        # Add a column indicating the number of levels contained in each
+        # feature id.
+        stratified_table['n levels'] = stratified_table.apply(
+            lambda x: len(x['NCBI_tax_id'].split('|')), axis=1
+        )
+
+        # Drop features where number of levels is not equal to what was requested
+        # by the user.
+        stratified_table = stratified_table[stratified_table['n levels'] == level]
+        if stratified_table.shape[0] == 0:
+            raise ValueError('No features contained exactly %d taxonomic levels.' % level)
+        columns_to_drop = ['feature-id', 'n levels']
+    else:
+        columns_to_drop = ['feature-id']
 
     # Generate the taxonomy result
     taxonomy = stratified_table['NCBI_tax_id']
@@ -85,7 +90,7 @@ def select_stratum(stratified_table: pd.DataFrame, level: int)\
     taxonomy.index.name = 'Feature ID'
 
     stratified_table = stratified_table.reset_index()
-    stratified_table = stratified_table.drop(['feature-id', 'n levels'],
+    stratified_table = stratified_table.drop(columns_to_drop,
                                              axis=1)
     stratified_table = stratified_table.set_index('NCBI_tax_id')
     stratified_table.index.name = 'sample-id'

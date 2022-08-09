@@ -16,10 +16,12 @@ plugin = Plugin(
 )
 
 MergedMetaphlanTable = SemanticType('MergedMetaphlanTable')
+StratifiedHumannTable = SemanticType('StratifiedHumannTable')
 
 plugin.register_semantic_types(MergedMetaphlanTable)
+plugin.register_semantic_types(StratifiedHumannTable)
 
-class MergedMetaphlanTableFormat(TextFileFormat):
+class BiobakeryTableFormat(TextFileFormat):
 
     def _equal_number_of_columns(self, n_lines):
         with self.open() as fh:
@@ -41,14 +43,29 @@ class MergedMetaphlanTableFormat(TextFileFormat):
         level_to_n_lines = {'min': 5, 'max': None}
         self._equal_number_of_columns(level_to_n_lines[level])
 
+class MergedMetaphlanTableFormat(BiobakeryTableFormat):
+    pass
+
+class StratifiedHumannTableFormat(BiobakeryTableFormat):
+    pass
+
 MergedMetaphlanTableDirectoryFormat = model.SingleFileDirectoryFormat(
     'MergedMetaphlanTableDirectoryFormat', 'table.tsv', MergedMetaphlanTableFormat)
+
+StratifiedHumannTableDirectoryFormat = model.SingleFileDirectoryFormat(
+    'StratifiedHumannTableDirectoryFormat', 'table.tsv', StratifiedHumannTableFormat)
 
 plugin.register_formats(MergedMetaphlanTableFormat,
                         MergedMetaphlanTableDirectoryFormat)
 
 plugin.register_semantic_type_to_format(MergedMetaphlanTable,
                                         MergedMetaphlanTableDirectoryFormat)
+
+plugin.register_formats(StratifiedHumannTableFormat,
+                        StratifiedHumannTableDirectoryFormat)
+
+plugin.register_semantic_type_to_format(StratifiedHumannTable,
+                                        StratifiedHumannTableDirectoryFormat)
 
 
 @plugin.register_transformer
@@ -58,9 +75,17 @@ def _1(ff: MergedMetaphlanTableFormat) -> pd.DataFrame:
     result.index.name = 'feature-id'
     return result
 
+@plugin.register_transformer
+def _2(ff: StratifiedHumannTableFormat) -> pd.DataFrame:
+    result = pd.read_csv(str(ff), sep='\t', header=0, index_col=0,
+                         comment='#')
+    result.index.name = 'feature-id'
+    return result
+
 citations = Citations.load('citations.bib', package='q2_sapienns')
 
-def select_stratum(stratified_table: pd.DataFrame, level: int = None)\
+def metaphlan_stratum(
+    stratified_table: pd.DataFrame, level: int = None)\
     -> (pd.DataFrame, pd.DataFrame):
 
     if level is not None:
@@ -99,7 +124,7 @@ def select_stratum(stratified_table: pd.DataFrame, level: int = None)\
 
 
 plugin.methods.register_function(
-    function=select_stratum,
+    function=metaphlan_stratum,
     inputs={'stratified_table': MergedMetaphlanTable},
     parameters={'level': Int % Range(1,None)},
     outputs=[('table', FeatureTable[Frequency]),
@@ -118,6 +143,49 @@ plugin.methods.register_function(
     name='Filter Metaphlan3 feature table to single level (or stratum).',
     description=("Filter a Metaphlan3 feature table to the specified "
                  "taxonomic level (or stratum)."),
+    citations=[
+        citations['bioBakery3']]
+)
+
+def humann_pathway(
+    pathway_table: pd.DataFrame,
+    value_multiplier: int = None) -> (pd.DataFrame, pd.DataFrame):
+
+    # Generate the taxonomy result
+    taxonomy = pd.DataFrame(list(pathway_table.index),
+                            columns=['Taxon'],
+                            index=pathway_table.index.copy())
+    taxonomy['Taxon'] = taxonomy.apply(
+        lambda x: x['Taxon'].replace('|', '; ').replace('.', '; '), axis=1
+    )
+    taxonomy.index.name = 'Feature ID'
+
+    # Generate the table
+    pathway_table.index.name = 'sample-id'
+    if value_multiplier is not None:
+        pathway_table *= 10000
+        pathway_table = pathway_table.astype('int32')
+
+    return pathway_table.T, taxonomy
+
+plugin.methods.register_function(
+    function=humann_pathway,
+    inputs={'pathway_table': StratifiedHumannTable},
+    parameters={'value_multiplier': Int % Range(1,None)},
+    outputs=[('table', FeatureTable[Frequency]),
+             ('taxonomy', FeatureData[Taxonomy])],
+    input_descriptions={
+        'pathway_table': ('A stratified Humann3 pathway table.'),
+    },
+    parameter_descriptions={
+        'value_multiplier': 'Multiple all values in table by this value.'
+    },
+    output_descriptions={
+        'table': ('Output feature table.'),
+        'taxonomy': ('Feature metadata.')},
+    name='Prepare Humann3 pathway data.',
+    description=("Prepare Humann3 pathway table and pathway metadata for "
+                 "QIIME 2."),
     citations=[
         citations['bioBakery3']]
 )

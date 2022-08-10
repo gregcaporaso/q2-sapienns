@@ -1,0 +1,14 @@
+# Pathway	sample1_Abundance
+UNMAPPED	140.0
+UNINTEGRATED	87.0
+UNINTEGRATED|g__Bacteroides.s__Bacteroides_caccae	23.0
+UNINTEGRATED|g__Bacteroides.s__Bacteroides_finegoldii	20.0
+UNINTEGRATED|unclassified	12.0
+PWY0-1301: melibiose degradation	57.5
+PWY0-1301: melibiose degradation|g__Bacteroides.s__Bacteroides_caccae	32.5
+PWY0-1301: melibiose degradation|g__Bacteroides.s__Bacteroides_finegoldii	4.5
+PWY0-1301: melibiose degradation|unclassified	3.0
+PWY-5484: glycolysis II (from fructose-6P)	54.7
+PWY-5484: glycolysis II (from fructose-6P)|g__Bacteroides.s__Bacteroides_caccae	16.7
+PWY-5484: glycolysis II (from fructose-6P)|g__Bacteroides.s__Bacteroides_finegoldii	8.0
+PWY-5484: glycolysis II (from fructose-6P)|unclassified	6.0

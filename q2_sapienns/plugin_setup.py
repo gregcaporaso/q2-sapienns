@@ -4,7 +4,7 @@ from q2_types.feature_table import FeatureTable, Frequency, RelativeFrequency
 from q2_types.feature_data import FeatureData, Taxonomy
 
 import q2_sapienns
-from ._humann import humann_pathway
+from ._humann import humann_pathway, humann_genefamily
 from ._metaphlan import metaphlan_taxon
 
 import pandas as pd
@@ -78,10 +78,12 @@ class HumannGeneFamilyFormat(HumannTableFormat):
     pass
 
 MetaphlanMergedAbundanceDirectoryFormat = model.SingleFileDirectoryFormat(
-    'MetaphlanMergedAbundanceDirectoryFormat', 'table.tsv', MetaphlanMergedAbundanceFormat)
+    'MetaphlanMergedAbundanceDirectoryFormat', 'table.tsv',
+    MetaphlanMergedAbundanceFormat)
 
 HumannPathAbundanceDirectoryFormat = model.SingleFileDirectoryFormat(
-    'HumannPathAbundanceDirectoryFormat', 'table.tsv', HumannPathAbundanceFormat)
+    'HumannPathAbundanceDirectoryFormat', 'table.tsv',
+    HumannPathAbundanceFormat)
 
 HumannGeneFamilyDirectoryFormat = model.SingleFileDirectoryFormat(
     'HumannGeneFamilyDirectoryFormat', 'table.tsv', HumannGeneFamilyFormat)
@@ -89,8 +91,8 @@ HumannGeneFamilyDirectoryFormat = model.SingleFileDirectoryFormat(
 plugin.register_formats(MetaphlanMergedAbundanceFormat,
                         MetaphlanMergedAbundanceDirectoryFormat)
 
-plugin.register_semantic_type_to_format(MetaphlanMergedAbundanceTable,
-                                        MetaphlanMergedAbundanceDirectoryFormat)
+plugin.register_semantic_type_to_format(
+    MetaphlanMergedAbundanceTable, MetaphlanMergedAbundanceDirectoryFormat)
 
 
 plugin.register_formats(HumannPathAbundanceFormat,
@@ -150,8 +152,8 @@ plugin.methods.register_function(
                   'level (or stratum).'),
         'taxonomy': ('Taxonomic feature metadata.')},
     name='Filter Metaphlan3 feature table to single level (or stratum).',
-    description=("Filter a Metaphlan3 feature table to the specified "
-                 "taxonomic level (or stratum)."),
+    description=('Filter a Metaphlan3 feature table to the specified '
+                 'taxonomic level (or stratum).'),
     citations=[
         citations['bioBakery3']]
 )
@@ -170,14 +172,39 @@ plugin.methods.register_function(
     parameter_descriptions={
         'strip_units_from_sample_ids': 'Remove units from input sample ids.',
         'destratify': ('Only include un-stratified pathways (i.e., those not '
-                       'associated with taxa) in the output table.')
+                       'including taxa) in the output table.')
     },
     output_descriptions={
         'table': ('Output feature table.'),
-        'taxonomy': ('Feature metadata.')},
+        'taxonomy': ('Output feature metadata.')},
     name='Prepare Humann3 pathway data.',
-    description=("Prepare Humann3 pathway table and pathway metadata for "
-                 "QIIME 2."),
+    description=('Prepare Humann3 pathway table and pathway metadata for '
+                 'QIIME 2.'),
+    citations=[
+        citations['bioBakery3']]
+)
+
+plugin.methods.register_function(
+    function=humann_genefamily,
+    inputs={'genefamily_table': HumannGeneFamilyTable},
+    parameters={'strip_units_from_sample_ids': Bool,
+                'destratify': Bool},
+    outputs=[('table', FeatureTable[Frequency]),
+             ('taxonomy', FeatureData[Taxonomy])],
+    input_descriptions={
+        'genefamily_table': ('A stratified Humann3 gene family table.'),
+    },
+    parameter_descriptions={
+        'strip_units_from_sample_ids': 'Remove units from input sample ids.',
+        'destratify': ('Only include un-stratified gene families (i.e., those '
+                       'not including taxa) in the output table.')
+    },
+    output_descriptions={
+        'table': ('Output feature table.'),
+        'taxonomy': ('Output feature metadata.')},
+    name='Prepare Humann3 gene family data.',
+    description=('Prepare Humann3 gene family table and gene family metadata '
+                 'for QIIME 2.'),
     citations=[
         citations['bioBakery3']]
 )

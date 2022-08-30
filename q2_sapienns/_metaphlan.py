@@ -1,8 +1,9 @@
 import pandas as pd
 
+
 def metaphlan_taxon(
-    stratified_table: pd.DataFrame, level: int)\
-    -> (pd.DataFrame, pd.DataFrame):
+        stratified_table: pd.DataFrame, level: int)\
+        -> (pd.DataFrame, pd.DataFrame):
 
     # Add a column indicating the number of levels contained in each
     # feature id.
@@ -13,7 +14,8 @@ def metaphlan_taxon(
     # by the user to "de-stratify" the table.
     table = stratified_table[stratified_table['n levels'] == level]
     if table.shape[0] == 0:
-        raise ValueError('No features contained exactly %d taxonomic levels.' % level)
+        raise ValueError('No features contained exactly %d taxonomic '
+                         'levels.' % level)
 
     # Generate the taxonomy result
     taxonomy = table['NCBI_tax_id']

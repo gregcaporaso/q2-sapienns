@@ -25,6 +25,7 @@ plugin.register_semantic_types(MetaphlanMergedAbundanceTable)
 plugin.register_semantic_types(HumannPathAbundanceTable)
 plugin.register_semantic_types(HumannGeneFamilyTable)
 
+
 class MetaphlanMergedAbundanceFormat(TextFileFormat):
 
     def _equal_number_of_columns(self, n_lines):
@@ -49,6 +50,7 @@ class MetaphlanMergedAbundanceFormat(TextFileFormat):
         level_to_n_lines = {'min': 5, 'max': None}
         self._equal_number_of_columns(level_to_n_lines[level])
 
+
 class HumannTableFormat(TextFileFormat):
 
     def _equal_number_of_columns(self, n_lines):
@@ -71,11 +73,14 @@ class HumannTableFormat(TextFileFormat):
         level_to_n_lines = {'min': 5, 'max': None}
         self._equal_number_of_columns(level_to_n_lines[level])
 
+
 class HumannPathAbundanceFormat(HumannTableFormat):
     pass
 
+
 class HumannGeneFamilyFormat(HumannTableFormat):
     pass
+
 
 MetaphlanMergedAbundanceDirectoryFormat = model.SingleFileDirectoryFormat(
     'MetaphlanMergedAbundanceDirectoryFormat', 'table.tsv',
@@ -122,9 +127,11 @@ def _1(ff: MetaphlanMergedAbundanceFormat) -> pd.DataFrame:
     result.index.name = 'feature-id'
     return result
 
+
 @plugin.register_transformer
 def _2(ff: HumannPathAbundanceFormat) -> pd.DataFrame:
     return _humann_to_df(ff)
+
 
 @plugin.register_transformer
 def _3(ff: HumannGeneFamilyFormat) -> pd.DataFrame:
@@ -137,7 +144,7 @@ citations = Citations.load('citations.bib', package='q2_sapienns')
 plugin.methods.register_function(
     function=metaphlan_taxon,
     inputs={'stratified_table': MetaphlanMergedAbundanceTable},
-    parameters={'level': Int % Range(1,None)},
+    parameters={'level': Int % Range(1, None)},
     outputs=[('table', FeatureTable[RelativeFrequency]),
              ('taxonomy', FeatureData[Taxonomy])],
     input_descriptions={

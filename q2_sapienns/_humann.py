@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def _humann(table, strip_units_from_sample_ids, destratify):
 
     table = table.reset_index()
@@ -18,7 +19,6 @@ def _humann(table, strip_units_from_sample_ids, destratify):
     taxonomy = taxonomy.set_index('feature-id')
     taxonomy.index.name = 'Feature ID'
 
-
     # Generate the table
     table = table.set_index('feature-id')
     table = table.T
@@ -36,16 +36,14 @@ def _humann(table, strip_units_from_sample_ids, destratify):
 
 
 def humann_pathway(
-    pathway_table: pd.DataFrame,
-    strip_units_from_sample_ids: bool = True,
-    destratify: bool = False) -> (pd.DataFrame, pd.DataFrame):
-
+        pathway_table: pd.DataFrame,
+        strip_units_from_sample_ids: bool = True,
+        destratify: bool = False) -> (pd.DataFrame, pd.DataFrame):
     return _humann(pathway_table, strip_units_from_sample_ids, destratify)
 
 
 def humann_genefamily(
-    genefamily_table: pd.DataFrame,
-    strip_units_from_sample_ids: bool = True,
-    destratify: bool = False) -> (pd.DataFrame, pd.DataFrame):
-
+        genefamily_table: pd.DataFrame,
+        strip_units_from_sample_ids: bool = True,
+        destratify: bool = False) -> (pd.DataFrame, pd.DataFrame):
     return _humann(genefamily_table, strip_units_from_sample_ids, destratify)

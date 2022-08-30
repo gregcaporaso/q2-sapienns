@@ -5,12 +5,13 @@ from qiime2.plugin.testing import TestPluginBase
 from q2_sapienns import HumannGeneFamilyFormat
 from q2_sapienns._humann import humann_genefamily
 
+
 class HumannTests(TestPluginBase):
 
     package = 'q2_sapienns.tests'
 
     def test_humann_genefamilies(self):
-        _, input_table_df =  self.transform_format(
+        _, input_table_df = self.transform_format(
             HumannGeneFamilyFormat, pd.DataFrame, 'humann-genefamilies-1.tsv'
         )
 
@@ -24,16 +25,15 @@ class HumannTests(TestPluginBase):
             list(obs_table.columns),
             ['UNMAPPED', 'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris'])  # noqa: E501
 
         self.assertEqual(list(obs_table.T['sample1']),
                          [187.0, 150.0, 150.0, 67.0, 57.0, 5.0, 4.0,
@@ -48,35 +48,33 @@ class HumannTests(TestPluginBase):
             ['UNMAPPED',
              'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris'])  # noqa: E501
 
         self.assertEqual(
             list(obs_tax['Taxon']),
             ['UNMAPPED',
              'UniRef50_unknown',
              'UniRef50_unknown; g__Bacteroides; s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_stercoris',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_stercoris'])  # noqa: E501
 
     def test_humann_genefamilies_unchanged_sample_ids(self):
-        _, input_table_df =  self.transform_format(
+        _, input_table_df = self.transform_format(
             HumannGeneFamilyFormat, pd.DataFrame, 'humann-genefamilies-1.tsv'
         )
 
@@ -91,16 +89,15 @@ class HumannTests(TestPluginBase):
             list(obs_table.columns),
             ['UNMAPPED', 'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris'])  # noqa: E501
 
         self.assertEqual(list(obs_table.T['sample1_Abundance-RPKs']),
                          [187.0, 150.0, 150.0, 67.0, 57.0, 5.0, 4.0,
@@ -115,35 +112,33 @@ class HumannTests(TestPluginBase):
             ['UNMAPPED',
              'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris'])  # noqa: E501
 
         self.assertEqual(
             list(obs_tax['Taxon']),
             ['UNMAPPED',
              'UniRef50_unknown',
              'UniRef50_unknown; g__Bacteroides; s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_stercoris',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_stercoris'])  # noqa: E501
 
     def test_humann_genefamilies_multi_sample(self):
-        _, input_table_df =  self.transform_format(
+        _, input_table_df = self.transform_format(
             HumannGeneFamilyFormat, pd.DataFrame, 'humann-genefamilies-2.tsv'
         )
 
@@ -159,17 +154,16 @@ class HumannTests(TestPluginBase):
              'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|unclassified',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|unclassified'])
 
         self.assertEqual(list(obs_table.T['sample1']),
                          [187.0, 150.0, 150.0, 25.0, 67.0, 57.0, 5.0, 4.0,
@@ -189,17 +183,16 @@ class HumannTests(TestPluginBase):
              'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|unclassified',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|unclassified'])
 
         self.assertEqual(
             list(obs_tax['Taxon']),
@@ -207,20 +200,19 @@ class HumannTests(TestPluginBase):
              'UniRef50_unknown',
              'UniRef50_unknown; g__Bacteroides; s__Bacteroides_fragilis',
              'UniRef50_unknown; g__Bacteroides; s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_stercoris',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; unclassified',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; unclassified'])
 
     def test_humann_genefamilies_multi_sample_unchanged_sample_ids(self):
-        _, input_table_df =  self.transform_format(
+        _, input_table_df = self.transform_format(
             HumannGeneFamilyFormat, pd.DataFrame, 'humann-genefamilies-2.tsv'
         )
 
@@ -239,17 +231,16 @@ class HumannTests(TestPluginBase):
              'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|unclassified',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|unclassified'])
 
         self.assertEqual(list(obs_table.T['sample1_Abundance-RPKs']),
                          [187.0, 150.0, 150.0, 25.0, 67.0, 57.0, 5.0, 4.0,
@@ -269,17 +260,16 @@ class HumannTests(TestPluginBase):
              'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase|unclassified',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|g__Bacteroides.s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase|unclassified'])
 
         self.assertEqual(
             list(obs_tax['Taxon']),
@@ -287,14 +277,13 @@ class HumannTests(TestPluginBase):
              'UniRef50_unknown',
              'UniRef50_unknown; g__Bacteroides; s__Bacteroides_fragilis',
              'UniRef50_unknown; g__Bacteroides; s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_fragilis',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_finegoldii',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_stercoris',
-             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; unclassified',
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_fragilis',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_finegoldii',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; g__Bacteroides; s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_A6L0N6: Conserved protein found in conjugate transposon; unclassified',  # noqa: E501
              'UniRef50_O83668: Fructose-bisphosphate aldolase',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_vulgatus',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_thetaiotaomicron',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_stercoris',
-             'UniRef50_O83668: Fructose-bisphosphate aldolase; unclassified',
-            ])
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_vulgatus',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_thetaiotaomicron',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; g__Bacteroides; s__Bacteroides_stercoris',  # noqa: E501
+             'UniRef50_O83668: Fructose-bisphosphate aldolase; unclassified'])

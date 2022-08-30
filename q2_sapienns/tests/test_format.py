@@ -1,15 +1,9 @@
-import os
-import os.path
-import shutil
-import unittest
-
 from q2_sapienns import (
     HumannGeneFamilyFormat,
     HumannPathAbundanceFormat,
     MetaphlanMergedAbundanceFormat,
 )
 from qiime2.plugin.testing import TestPluginBase
-from qiime2.plugin import ValidationError
 
 
 class TestHumannGeneFamilyFormat(TestPluginBase):

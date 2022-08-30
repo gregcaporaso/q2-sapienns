@@ -4,4 +4,8 @@ __version__ = _version.get_versions()['version']
 
 from .plugin_setup import (HumannGeneFamilyDirectoryFormat,
                            HumannGeneFamilyFormat,
+                           HumannPathAbundanceDirectoryFormat,
+                           HumannPathAbundanceFormat,
+                           MetaphlanMergedAbundanceDirectoryFormat,
+                           MetaphlanMergedAbundanceFormat
 )

@@ -25,7 +25,8 @@ class HumannGeneFamilyTests(HumannTests):
         self.assertEqual(list(obs_table.index), ['sample1'])
         self.assertEqual(
             list(obs_table.columns),
-            ['UNMAPPED', 'UniRef50_unknown',
+            ['UNMAPPED',
+             'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
              'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
              'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501
@@ -89,7 +90,8 @@ class HumannGeneFamilyTests(HumannTests):
         self.assertEqual(list(obs_table.index), ['sample1_Abundance-RPKs'])
         self.assertEqual(
             list(obs_table.columns),
-            ['UNMAPPED', 'UniRef50_unknown',
+            ['UNMAPPED',
+             'UniRef50_unknown',
              'UniRef50_unknown|g__Bacteroides.s__Bacteroides_fragilis',
              'UniRef50_A6L0N6: Conserved protein found in conjugate transposon',  # noqa: E501
              'UniRef50_A6L0N6: Conserved protein found in conjugate transposon|g__Bacteroides.s__Bacteroides_fragilis',  # noqa: E501

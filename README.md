@@ -2,7 +2,7 @@
 
 q2-sapienns is the working title for a set of tools that can be used for preparing [BioBakery3](https://doi.org/10.7554/eLife.65088) data for use in [QIIME 2](https://qiime2.org). As QIIME 2 expands support for metagenomics data analysis, this will provide a framework for working with processed BioBakery3 data, and for comparing other methods to BioBakery3.
 
-**At present this is under-tested, and not ready for use in real analyses. Consider this "alpha" software.** There are test data files in this repository in the `q2-sapienns/tests/data` directory, but no detailed unit tests yet.
+**At present this is under-tested, and not ready for use in real analyses. Consider this "alpha" software.**
 
 Some basic usage examples are provided below.
 

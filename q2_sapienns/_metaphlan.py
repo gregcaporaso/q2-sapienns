@@ -29,6 +29,7 @@ def metaphlan_taxon(
     table = table.reset_index()
     table = table.drop(['feature-id', 'n levels'], axis=1)
     table = table.set_index('NCBI_tax_id')
+    table = table.T
     table.index.name = 'sample-id'
 
-    return table.T, taxonomy
+    return table, taxonomy

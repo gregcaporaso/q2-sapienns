@@ -148,7 +148,7 @@ plugin.methods.register_function(
     outputs=[('table', FeatureTable[RelativeFrequency]),
              ('taxonomy', FeatureData[Taxonomy])],
     input_descriptions={
-        'stratified_table': ('A stratified Metaphlan3 feature table.'),
+        'stratified_table': ('A stratified MetaPhlAn3 feature table.'),
     },
     parameter_descriptions={
         'level': ('The level (or stratum) of the feature metadata heirarchy '
@@ -158,8 +158,8 @@ plugin.methods.register_function(
         'table': ('Filtered table containing only features at specified '
                   'level (or stratum).'),
         'taxonomy': ('Taxonomic feature metadata.')},
-    name='Filter Metaphlan3 feature table to single level (or stratum).',
-    description=('Filter a Metaphlan3 feature table to the specified '
+    name='Filter MetaPhlAn3 feature table to single level (or stratum).',
+    description=('Filter a MetaPhlAn3 feature table to the specified '
                  'taxonomic level (or stratum).'),
     citations=[
         citations['bioBakery3']]
@@ -174,19 +174,23 @@ plugin.methods.register_function(
     outputs=[('table', FeatureTable[Frequency]),
              ('taxonomy', FeatureData[Taxonomy])],
     input_descriptions={
-        'pathway_table': ('A stratified Humann3 pathway table.'),
+        'pathway_table': ('A stratified HUMAnN3 pathway table.'),
     },
     parameter_descriptions={
         'strip_units_from_sample_ids': 'Remove units from input sample ids.',
         'destratify': ('Only include un-stratified pathways (i.e., those not '
-                       'including taxa) in the output table.')
+                       'including taxa) in the output table. By default, only '
+                       'stratified pathways will be included in the output '
+                       'table.')
     },
     output_descriptions={
         'table': ('Output feature table.'),
         'taxonomy': ('Output feature metadata.')},
-    name='Prepare Humann3 pathway data.',
-    description=('Prepare Humann3 pathway table and pathway metadata for '
-                 'QIIME 2.'),
+    name='Prepare HUMAnN3 pathway data.',
+    description=('Prepare HUMAnN3 pathway table and pathway metadata for '
+                 'QIIME 2. The table is prepared so that only '
+                 'stratified (i.e., including taxa) or unstratified (i.e., '
+                 'not including taxa) data are included in the output.'),
     citations=[
         citations['bioBakery3']]
 )
@@ -199,19 +203,23 @@ plugin.methods.register_function(
     outputs=[('table', FeatureTable[Frequency]),
              ('taxonomy', FeatureData[Taxonomy])],
     input_descriptions={
-        'genefamily_table': ('A stratified Humann3 gene family table.'),
+        'genefamily_table': ('A stratified HUMAnN3 gene family table.'),
     },
     parameter_descriptions={
         'strip_units_from_sample_ids': 'Remove units from input sample ids.',
         'destratify': ('Only include un-stratified gene families (i.e., those '
-                       'not including taxa) in the output table.')
+                       'not including taxa) in the output table. By default, '
+                       'only stratified pathways will be included in the '
+                       'output table.')
     },
     output_descriptions={
         'table': ('Output feature table.'),
         'taxonomy': ('Output feature metadata.')},
-    name='Prepare Humann3 gene family data.',
-    description=('Prepare Humann3 gene family table and gene family metadata '
-                 'for QIIME 2.'),
+    name='Prepare HUMAnN3 gene family data.',
+    description=('Prepare HUMAnN3 gene family table and gene family metadata '
+                 'for QIIME 2. The table is prepared so that only '
+                 'stratified (i.e., including taxa) or unstratified (i.e., '
+                 'not including taxa) data are included in the output.'),
     citations=[
         citations['bioBakery3']]
 )

@@ -4,11 +4,14 @@ import pandas as pd
 def _humann(table, strip_units_from_sample_ids, destratify):
 
     table = table.reset_index()
+
+    table['unstratified'] = table.apply(
+        lambda x: '|' not in x['feature-id'], axis=1)
     if destratify:
-        table['unstratified'] = table.apply(
-            lambda x: '|' not in x['feature-id'], axis=1)
         table = table[table['unstratified']]
-        table = table.drop('unstratified', axis=1)
+    else:
+        table = table[~table['unstratified']]
+    table = table.drop('unstratified', axis=1)
 
     # Generate the taxonomy result
     taxonomy = table[['feature-id']].copy()

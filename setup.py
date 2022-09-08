@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-# Copyright (c) 2022, Greg Caporaso.
+# Copyright (c) 2022, QIIME 2 development team.
 #
 # Distributed under the terms of the Modified BSD License.
 #

@@ -27,3 +27,6 @@ class TestTypes(TestPluginBase):
         self.assertSemanticTypeRegisteredToFormat(
             HumannPathAbundanceTable,
             HumannPathAbundanceDirectoryFormat)
+
+    def test_pass(self):
+        pass

@@ -2,11 +2,37 @@
 
 q2-sapienns is a set of tools that can be used for preparing [BioBakery3](https://doi.org/10.7554/eLife.65088) data for use in [QIIME 2](https://qiime2.org). As QIIME 2 expands support for metagenomics data analysis, this will provide a framework for working with processed BioBakery3 data, and for comparing other methods to BioBakery3.
 
-**q2-sapienns is comprehensively unit tested, but hasn't been field-tested much yet. If you notice any issues, please post to [the issue tracker](https://github.com/gregcaporaso/q2-sapienns/issues).**
+**q2-sapienns is comprehensively unit tested, but hasn't been field-tested much yet. If you notice any issues, please post to [the issue tracker](https://github.com/gregcaporaso/q2-sapienns/issues).** Basic usage examples are provided below.
 
-Some basic usage examples are provided below.
+## Installation
 
-## HUMAnN 3
+First, create and/or activate a QIIME 2 environment by following the [QIIME 2 install instructions](https://docs.qiime2.org/2022.8/install/native/). q2-sapienns has most recently been tested with QIIME 2 2022.8.
+
+Then, install q2-sapienns using `pip` as follows...
+
+```bash
+pip install git+https://github.com/gregcaporaso/q2-sapienns.git
+```
+
+... refresh your QIIME 2 environment...
+
+```bash
+qiime dev refresh-cache
+```
+
+... and you should now see `sapienns` in your list of available QIIME 2 plugins:
+
+```bash
+$ qiime --help
+Usage: qiime [OPTIONS] COMMAND [ARGS]...
+...
+  sample-classifier   Plugin for machine learning prediction of sample metadata.
+  sapienns            Plugin for interacting with biobakery data.
+  taxa                Plugin for working with feature taxonomy annotations.
+...
+```
+
+## Usage: HUMAnN 3
 
 ### Pathway abundance tables
 
@@ -48,7 +74,7 @@ qiime sapienns humann-genefamily --i-genefamily-table humann-genefamilies-2.qza 
 qiime sapienns humann-genefamily --i-genefamily-table humann-genefamilies-2.qza --o-table table-destratified.qza --o-taxonomy feature-data-destratified.qza --p-destratify
 ```
 
-## MetaPhlAn 3
+## Usage: MetaPhlAn 3
 
 Import a MetaPhlAn 3 taxonomy file and create `FeatureTable[RelativeFrequency]` and `FeatureData[Taxonomy]` artifacts from the imported table.See the [MetaPhlAn 3 documentation](https://huttenhower.sph.harvard.edu/metaphlan) for details on this file and how to create it. There can be one or more samples in this file. If using the default reference with MetaPhlAn 3, the taxnomic ids will refer to the [NCBI taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy).
 

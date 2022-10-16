@@ -124,3 +124,13 @@ class TestMetaphlanMergedAbundanceFormat(TestPluginBase):
             with self.assertRaisesRegex(ValidationError, 'float.*gigawatt'):
                 format = MetaphlanMergedAbundanceFormat(filepath, mode='r')
                 format.validate()
+
+    def test_metaphlan_merged_abundance_format_extra_column(self):
+        filenames = ['metaphlan-merged-abundance-5.tsv']
+        filepaths = [self.get_data_path(filename)
+                     for filename in filenames]
+
+        for filepath in filepaths:
+            with self.assertRaisesRegex(ValidationError, 'float.*abc'):
+                format = MetaphlanMergedAbundanceFormat(filepath, mode='r')
+                format.validate()

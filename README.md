@@ -34,6 +34,8 @@ Usage: qiime [OPTIONS] COMMAND [ARGS]...
 
 ## Usage: HUMAnN 3
 
+There seem to have not been changes to the HUMAnN file formats used here between version 2-3.5 (and likely version 4), so these tools should work with all of those versions [(source)](https://forum.biobakery.org/t/human-and-metaphlan-file-formats/4024/3?u=gregcaporaso). If you notice any issues, please let me know!
+
 ### Pathway abundance tables
 
 Import a HUMANn 3 _Pathway abundance file_. See the [HUMAnN 3 User Manual and Tutorial](https://huttenhower.sph.harvard.edu/humann) for details on this file and how to create it. There can be one or more samples in this file. If using default reference data with HUMANn 3, the pathway annotations will refer to [MetaCyc pathways](https://metacyc.org/).
@@ -75,6 +77,21 @@ qiime sapienns humann-genefamily --i-genefamily-table humann-genefamilies-2.qza 
 ```
 
 ## Usage: MetaPhlAn 3
+
+There may be relevant changes to the file formats used here between versions of MetaPhlAn, though those changes may not be relevant to the _Merged Abundance Table_ [(source)](https://forum.biobakery.org/t/human-and-metaphlan-file-formats/4024/3?u=gregcaporaso). This functionality was developed for the MetaPhlAn format that contains exactly two columns (`clade_name` and `NCBI_tax_id`) before the sample abundance columns. I recommend looking at the column headers for the first three columns in your input file before attempting to use this code. The file should look something like:
+
+```
+$ head -5 metaphlan-merged-abundance.tsv
+#mpa_v30_CHOCOPhlAn_201901
+clade_name	NCBI_tax_id	sample1	sample_2
+k__Archaea	2157	9.75907	0.02352
+k__Archaea|p__Euryarchaeota	2157|28890	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria	2157|28890|183925	9.75907	0.02352
+```
+
+q2-sapienns _should_ fail if you try to import data in a format different than the one it's expecting, but I can't be sure that format validation will work in all cases. It won't hurt to look at your data before using it with q2-sapienns.
+
+### Merged abundance table
 
 Import a MetaPhlAn 3 taxonomy file and create `FeatureTable[RelativeFrequency]` and `FeatureData[Taxonomy]` artifacts from the imported table.See the [MetaPhlAn 3 documentation](https://huttenhower.sph.harvard.edu/metaphlan) for details on this file and how to create it. There can be one or more samples in this file. If using the default reference with MetaPhlAn 3, the taxnomic ids will refer to the [NCBI taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy).
 

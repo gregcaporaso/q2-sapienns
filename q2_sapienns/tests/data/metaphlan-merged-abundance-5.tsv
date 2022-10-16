@@ -1,0 +1,22 @@
+#mpa_v30_CHOCOPhlAn_201901
+clade_name	NCBI_tax_id	extra-info	sample1	sample_2
+k__Archaea	2157	abc	9.75907	0.02352
+k__Archaea|p__Euryarchaeota	2157|28890	abc	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria	2157|28890|183925	abc	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria|o__Methanobacteriales	2157|28890|183925|2158	abc	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria|o__Methanobacteriales|f__Methanobacteriaceae	2157|28890|183925|2158|2159	abc	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria|o__Methanobacteriales|f__Methanobacteriaceae|g__Methanobrevibacter	2157|28890|183925|2158|2159|2172	abc	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria|o__Methanobacteriales|f__Methanobacteriaceae|g__Methanobrevibacter|s__Methanobrevibacter_smithii	2157|28890|183925|2158|2159|2172|2173	abc	9.75907	0.02352
+k__Bacteria	2	abc	90.24093	99.97648
+k__Bacteria|p__Actinobacteria	2|201174	abc	90.24093	99.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria	2|201174|1760	abc	90.24093	99.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales	2|201174|1760|2037	abc	90.24093	99.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae	2|201174|1760|2037|2049	abc	90.24093	99.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinobaculum	2|201174|1760|2037|2049|76833	abc	45.0	10.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinobaculum|s__Actinobaculum_sp_oral_taxon_183	2|201174|1760|2037|2049|76833|712888	abc	45.0	10.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces	2|201174|1760|2037|2049|1654	abc	45.24093	89
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_graevenitzii	2|201174|1760|2037|2049|1654|55565	abc	5.0	0.0
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_naeslundii	2|201174|1760|2037|2049|1654|1655	abc	1.24093	0.0
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_odontolyticus	2|201174|1760|2037|2049|1654|1660	abc	25.0	0.0
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_oris	2|201174|1760|2037|2049|1654|544580	abc	10.0	9.0
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_sp_HMSC035G02	2|201174|1760|2037|2049|1654|1739406	defg	4.0	80.0

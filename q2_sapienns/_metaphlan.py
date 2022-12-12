@@ -40,3 +40,11 @@ def metaphlan_taxon(
     table.index.name = 'sample-id'
 
     return table, taxonomy
+
+
+def frequency(table: pd.DataFrame, target_freq: int = 100000) -> pd.DataFrame:
+    target_freq /= 100
+    result = table * target_freq
+    result = result.round(0)
+    result = result.astype(int)
+    return result

@@ -13,10 +13,12 @@ def metaphlan_taxon(
         stratified_table: pd.DataFrame, level: int)\
         -> (pd.DataFrame, pd.DataFrame):
 
+    stratified_table = stratified_table.reset_index()
+
     # Add a column indicating the number of levels contained in each
     # feature id.
     stratified_table['n levels'] = stratified_table.apply(
-        lambda x: len(x['NCBI_tax_id'].split('|')), axis=1)
+        lambda x: len(x['feature-id'].split('|')), axis=1)
 
     # Drop features where number of levels is not equal to what was requested
     # by the user to "de-stratify" the table.
@@ -26,17 +28,14 @@ def metaphlan_taxon(
                          'levels.' % level)
 
     # Generate the taxonomy result
-    taxonomy = table['NCBI_tax_id']
-    taxonomy = taxonomy.reset_index()
+    taxonomy = table['feature-id'].to_frame()
     taxonomy['Taxon'] = taxonomy.apply(
         lambda x: x['feature-id'].replace('|', '; '), axis=1)
-    taxonomy = taxonomy.drop('feature-id', axis=1)
-    taxonomy = taxonomy.set_index('NCBI_tax_id')
+    taxonomy = taxonomy.set_index('feature-id')
     taxonomy.index.name = 'Feature ID'
 
-    table = table.reset_index()
-    table = table.drop(['feature-id', 'n levels'], axis=1)
-    table = table.set_index('NCBI_tax_id')
+    table = table.drop(['NCBI_tax_id', 'n levels'], errors='ignore', axis=1)
+    table = table.set_index('feature-id')
     table = table.T
     table.index.name = 'sample-id'
 

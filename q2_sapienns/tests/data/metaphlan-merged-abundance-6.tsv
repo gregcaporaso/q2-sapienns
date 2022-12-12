@@ -1,0 +1,22 @@
+#mpa_v30_CHOCOPhlAn_201901
+clade_name	sample1	sample_2
+k__Archaea	9.75907	0.02352
+k__Archaea|p__Euryarchaeota	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria|o__Methanobacteriales	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria|o__Methanobacteriales|f__Methanobacteriaceae	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria|o__Methanobacteriales|f__Methanobacteriaceae|g__Methanobrevibacter	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria|o__Methanobacteriales|f__Methanobacteriaceae|g__Methanobrevibacter|s__Methanobrevibacter_smithii	9.75907	0.02352
+k__Bacteria	90.24093	99.97648
+k__Bacteria|p__Actinobacteria	90.24093	99.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria	90.24093	99.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales	90.24093	99.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae	90.24093	99.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinobaculum	45.0	10.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinobaculum|s__Actinobaculum_sp_oral_taxon_183	45.0	10.97648
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces	45.24093	89
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_graevenitzii	5.0	0.0
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_naeslundii	1.24093	0.0
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_odontolyticus	25.0	0.0
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_oris	10.0	9.0
+k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces_sp_HMSC035G02	4.0	80.0

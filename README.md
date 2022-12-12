@@ -78,7 +78,7 @@ qiime sapienns humann-genefamily --i-genefamily-table humann-genefamilies-2.qza 
 
 ## Usage: MetaPhlAn 3
 
-There may be relevant changes to the file formats used here between versions of MetaPhlAn, though those changes may not be relevant to the _Merged Abundance Table_ [(source)](https://forum.biobakery.org/t/human-and-metaphlan-file-formats/4024/3?u=gregcaporaso). This functionality was developed for the MetaPhlAn format that contains exactly two columns (`clade_name` and `NCBI_tax_id`) before the sample abundance columns. I recommend looking at the column headers for the first three columns in your input file before attempting to use this code. The file should look something like:
+There may be relevant changes to the file formats used here between versions of MetaPhlAn, though those changes may not be relevant to the _Merged Abundance Table_ [(source)](https://forum.biobakery.org/t/human-and-metaphlan-file-formats/4024/3?u=gregcaporaso). This functionality was developed for the MetaPhlAn format that contains exactly two columns (`clade_name` and `NCBI_tax_id`) before the sample abundance columns, but should also work if the `NCBI_tax_id` is not present (as is the case in MetaPhlAn 4 output). I recommend looking at the column headers for the first three columns in your input file before attempting to use this code. The file should look something like:
 
 ```
 $ head -5 metaphlan-merged-abundance.tsv
@@ -87,6 +87,17 @@ clade_name	NCBI_tax_id	sample1	sample_2
 k__Archaea	2157	9.75907	0.02352
 k__Archaea|p__Euryarchaeota	2157|28890	9.75907	0.02352
 k__Archaea|p__Euryarchaeota|c__Methanobacteria	2157|28890|183925	9.75907	0.02352
+```
+
+or
+
+```
+$ head -5 metaphlan-merged-abundance.tsv
+#mpa_vJan21_CHOCOPhlAnSGB_202103
+clade_name	sample1	sample_2
+k__Archaea	9.75907	0.02352
+k__Archaea|p__Euryarchaeota	9.75907	0.02352
+k__Archaea|p__Euryarchaeota|c__Methanobacteria	9.75907	0.02352
 ```
 
 q2-sapienns _should_ fail if you try to import data in a format different than the one it's expecting, but I can't be sure that format validation will work in all cases. It won't hurt to look at your data before using it with q2-sapienns.

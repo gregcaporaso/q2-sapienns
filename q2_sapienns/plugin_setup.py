@@ -13,7 +13,7 @@ from q2_types.feature_data import FeatureData, Taxonomy
 
 import q2_sapienns
 from ._humann import humann_pathway, humann_genefamily
-from ._metaphlan import metaphlan_taxon
+from ._metaphlan import metaphlan_taxon, frequency
 
 import pandas as pd
 
@@ -200,6 +200,26 @@ plugin.methods.register_function(
         citations['bioBakery3']]
 )
 
+plugin.methods.register_function(
+    function=frequency,
+    inputs={'table': FeatureTable[RelativeFrequency]},
+    parameters={'target_freq': Int % Range(1, None)},
+    outputs=[('output_table', FeatureTable[Frequency])],
+    input_descriptions={
+        'table': ('A relative frequency feature table.'),
+    },
+    parameter_descriptions={
+        'target_freq': ('The target per sample total frequency.')
+    },
+    output_descriptions={
+        'output_table': 'A frequency feature table.'},
+    name='Convert relative frequencies to frequencies.',
+    description=('Convert relative frequencies to frequencies by multipling '
+                 'each value by `target_freq` and then rounding to whole '
+                 'numbers. Because rounding is taking place, the total '
+                 'frequency per sample may not be exactly `target_freq`.'),
+    citations=[]
+)
 
 plugin.methods.register_function(
     function=humann_pathway,

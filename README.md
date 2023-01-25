@@ -104,7 +104,7 @@ q2-sapienns _should_ fail if you try to import data in a format different than t
 
 ### Merged abundance table
 
-Import a MetaPhlAn 3 taxonomy file and create `FeatureTable[RelativeFrequency]` and `FeatureData[Taxonomy]` artifacts from the imported table.See the [MetaPhlAn 3 documentation](https://huttenhower.sph.harvard.edu/metaphlan) for details on this file and how to create it. There can be one or more samples in this file. If using the default reference with MetaPhlAn 3, the taxnomic ids will refer to the [NCBI taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy).
+Import a MetaPhlAn 3 taxonomy file and create `FeatureTable[RelativeFrequency]` and `FeatureData[Taxonomy]` artifacts from the imported table. See the [MetaPhlAn 3 documentation](https://huttenhower.sph.harvard.edu/metaphlan) for details on this file and how to create it. There can be one or more samples in this file. If using the default reference with MetaPhlAn 3, the taxonomic ids will refer to the [NCBI taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy).
 
 ```
 qiime tools import --input-path metaphlan-merged-abundance-1.tsv --output-path metaphlan-merged-abundance-1.qza --type MetaphlanMergedAbundanceTable

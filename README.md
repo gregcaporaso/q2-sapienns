@@ -68,7 +68,7 @@ qiime metadata tabulate --m-input-file feature-data-destratified.qza --o-visuali
 Import a HUMANn 3 _Gene families file_ and create `FeatureTable[Frequency]` and `FeatureData[Taxonomy]` artifacts from the imported table. See the [HUMAnN 3 User Manual and Tutorial](https://huttenhower.sph.harvard.edu/humann) for details on this file and how to create it. There can be one or more samples in this file. If using the default reference with HUMANn 3, the gene family annotations will refer to [UniRef50](https://www.uniprot.org/).
 
 ```
-qiime tools import --input-path humann-genefamilies-2.tsv --output-path humann-genefamilies-2.tsv --type HumannGeneFamilyTable
+qiime tools import --input-path humann-genefamilies-2.tsv --output-path humann-genefamilies-2.qza --type HumannGeneFamilyTable
 ```
 
 ```

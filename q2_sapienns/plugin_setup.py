@@ -56,6 +56,8 @@ class MetaphlanMergedAbundanceFormat(TextFileFormat):
                     break
                 fields = line.strip().split('\t')
                 n_fields = len(fields)
+                if file_length == idx + 1 and line == '\n':
+                    break
                 if n_fields != n_header_fields:
                     raise ValidationError(
                         'Number of columns on line %d is inconsistent with '
